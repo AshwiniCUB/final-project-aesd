@@ -1,10 +1,14 @@
-bme280:	bme280.o 
-	gcc -Wall $^ -o $@ -li2c
+CFLAGS = -g -Wall -Wextra -pedantic -std=c11 -Wno-implicit-function-declaration
+LDFLAGS = -lrt
 
-%.o:	%.c %.h
-	gcc -Wall -O2 -c $< -o $@
+TARGET = bme280
+SRCS = bme280.c
+
+all: $(TARGET)
+
+$(TARGET): $(SRCS)
+	gcc $(CFLAGS) -o $(TARGET) $(SRCS) $(LDFLAGS)
 
 clean:
-	rm -f *.o bme280
-
+	rm -f $(TARGET) *.o
 
