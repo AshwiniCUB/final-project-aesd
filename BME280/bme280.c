@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include "calibration.h"
+
 
 int main(void) {
     int device_file = 0;
