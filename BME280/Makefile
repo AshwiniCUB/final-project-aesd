@@ -1,14 +1,23 @@
-CFLAGS = -g -Wall -Wextra -pedantic -std=c11 -Wno-implicit-function-declaration
-LDFLAGS = -lrt
+ifeq ($(CC),)
+	CC=$(CROSS_COMPILE)gcc
+endif
 
-TARGET = bme280
-SRCS = bme280.c
+ifeq ($(CFLAGS),)
+	CFLAGS= -g -Wall -Werror
+endif
 
-all: $(TARGET)
+ifeq ($(LDFLAGS),)
+	LDFLAGS = -lrt
+endif
 
-$(TARGET): $(SRCS)
-	gcc $(CFLAGS) -o $(TARGET) $(SRCS) $(LDFLAGS)
+all: bme280
+default: bme280
 
-clean:
-	rm -f $(TARGET) *.o
+bme280 :bme280.o
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) -o bme280 bme280.o $(LDFLAGS)
 
+bme280.o : bme280.c
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) -c bme280.c $(LDFLAGS)
+
+clean :
+	rm -f bme280 *.o
