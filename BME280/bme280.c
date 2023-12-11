@@ -1,3 +1,5 @@
+#include "i2c_utils.h"
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,7 +7,6 @@
 #include <string.h>
 #include <math.h>
 #include <fcntl.h>
-#include "i2c_utils.h"
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
 #include <errno.h>
